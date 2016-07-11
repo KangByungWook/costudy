@@ -1,0 +1,22 @@
+{
+  "name": "costudy",
+  "version": "1.0.0",
+  "description": "group code study matching application",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/KangByungWook/MEAN_STACK.git"
+  },
+  "author": "Ryan Kang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KangByungWook/MEAN_STACK/issues"
+  },
+  "homepage": "https://github.com/KangByungWook/MEAN_STACK#readme",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
+}

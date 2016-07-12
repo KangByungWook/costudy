@@ -2,7 +2,6 @@ var User = require('mongoose').model('User');
 
 exports.create = function(req, res, next){
   var user = new User(req.body);
-
   user.save(function(err){
     if(err){
       return next(err);
@@ -37,4 +36,24 @@ exports.userByID = function(req, res, next, id){
       next();
     }
   })
+}
+
+exports.update = function(req, res, next){
+  User.findByIdAndUpdate(req.user.id, req.body, function(err, user){
+    if(err){
+      return next(err);
+    } else{
+      res.json(user);
+    }
+  });
+}
+
+exports.delete = function(req, res, next){
+  req.user.remove(function(err){
+    if(err){
+      return next(err);
+    }else{
+      res.json(req.user);
+    }
+  });
 }

@@ -1,2 +1,9 @@
 <% layout('base') -%>
 index page
+<% if (userFullName) { %>
+  <h2>Hello <%=userFullName%></h2>
+  <a href="/signout">Sign out</a>
+<% } else { %>
+  <a href="/signup">Sign up</a>
+  <a href="/signin">Sign in</a>
+<% } %>

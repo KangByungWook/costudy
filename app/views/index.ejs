@@ -1,16 +1,2 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title%></title>
-  </head>
-  <body>
-    <% if (userFullName) { %>
-      <h2>Hello <%=userFullName%></h2>
-      <a href="/signout">Sign out</a>
-    <% } else { %>
-      <a href="/signup">Sign up</a>
-      <a href="/signout">Sign out</a>
-    <% } %>
-
-  </body>
-</html>
+<% layout('base') -%>
+index page

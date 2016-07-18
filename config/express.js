@@ -6,7 +6,8 @@ bodyParser = require('body-parser'),
 methodOverride = require('method-override'),
 session = require('express-session'),
 passport = require('passport'),
-flash = require('connect-flash');
+flash = require('connect-flash'),
+engine = require('ejs-locals');
 
 module.exports = function(){
   var app = express();
@@ -29,6 +30,7 @@ module.exports = function(){
     secret: config.sessionSecret
   }));
 
+  app.engine('ejs', engine);
   app.set('views', './app/views');
   app.set('view engine', 'ejs');
 

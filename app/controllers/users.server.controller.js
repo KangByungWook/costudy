@@ -21,6 +21,7 @@ var getErrorMessage = function(err){
   return message;
 };
 
+
 exports.renderSignin = function(req, res, next){
   if(!req.user){
     res.render('signin',{

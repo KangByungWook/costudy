@@ -130,3 +130,14 @@ exports.delete = function(req, res, next){
     }
   });
 }
+
+// 사용자가 현재 로그인이 되어있는지 체크
+exports.requiresLogin = function(req, res, next){
+  if(!req.isAuthenticated()){
+    return res.status(401).send({
+      message: 'User is not logged in'
+    });
+  }
+
+  next();
+}

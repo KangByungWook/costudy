@@ -3,19 +3,20 @@ var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
 
 var UserSchema = new Schema({
-  firstName: String,
-  lastName: String,
   email: {
     type: String,
     index: true,
     match: [/.+\@.+\..+/, "Please fill a valid e-mail address"]
   },
-  username: {
+  fullName: {
     type: String,
     trim: true,
-    // 주 색인
-    unique: true,
-    required: 'Username is required'
+    required: '실명을 입력해주세요'
+  },
+  contact: {
+    type: String,
+    trim: true,
+    required: '연락처를 입력해주세요'
   },
   password: {
     type: String,
@@ -54,15 +55,15 @@ var UserSchema = new Schema({
   }
 });
 
-// 가상 컬럼 생성
-// 모든 도큐먼트에 적용
-UserSchema.virtual('fullName').get(function() {
-  return this.firstName + ' ' + this.lastName;
-}).set(function(fullName){
-  var splitName = fullName.split(' ');
-  this.firstName = splitName[0] || '';
-  this.lastName = splitName[1] || '';
-});
+// // 가상 컬럼 생성
+// // 모든 도큐먼트에 적용
+// UserSchema.virtual('fullName').get(function() {
+//   return this.firstName + ' ' + this.lastName;
+// }).set(function(fullName){
+//   var splitName = fullName.split(' ');
+//   this.firstName = splitName[0] || '';
+//   this.lastName = splitName[1] || '';
+// });
 
 UserSchema.pre('save', function(next){
   if (this.password){

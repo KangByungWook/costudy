@@ -8,7 +8,7 @@ var UserSchema = new Schema({
     index: true,
     match: [/.+\@.+\..+/, "Please fill a valid e-mail address"]
   },
-  fullName: {
+  username: {
     type: String,
     trim: true,
     required: '실명을 입력해주세요'

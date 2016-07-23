@@ -1,13 +1,98 @@
 <nav class="white" role="navigation">
   <div class="nav-wrapper container">
-    <a id="logo-container" href="#" class="brand-logo">Logo</a>
-    <ul class="right hide-on-med-and-down">
-      <li><a href="#">Navbar Link</a></li>
-    </ul>
+    <a id="logo-container" href="/" class="brand-logo">Costudy</a>
+    <% if (user) { %>
+      <ul class="right hide-on-med-and-down">
 
-    <ul id="nav-mobile" class="side-nav">
-      <li><a href="#">Navbar Link</a></li>
-    </ul>
-    <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+      </ul>
+
+      <ul class="right hide-on-med-and-down">
+        <!-- Dropdown Trigger -->
+        <a class='dropdown-button btn' href='#' data-activates='user_info'>
+          <%= user.username%> 님</a>
+
+        <!-- Dropdown Structure -->
+        <ul id='user_info' class='dropdown-content'>
+          <li>
+            <%= user.username%>
+          </li>
+          <li><a href="/member/edit">프로필 보기</a></li>
+          <li class="divider"></li>
+          <li><a href="/member/product">나의 스터디</a></li>
+          <li><a href="/member/bookmark">찜한 스터디</a></li>
+          <li><a href="/member/transaction">내 구매 내역</a></li>
+          <li><a href="/member/credit-and-coupon">적립금/쿠폰</a></li>
+          <li class="divider"></li>
+          <li><a href="/faq">자주 묻는 질문</a></li>
+          <li><a href="/signout">로그아웃</a></li>
+        </ul>
+      </ul>
+
+      <% } else { %>
+        <ul class="right hide-on-med-and-down">
+          <li><a class="waves-effect waves-light btn modal-trigger" href="#sign_in_modal">로그인</a></li>
+        </ul>
+        <ul class="right hide-on-med-and-down">
+          <li><a class="waves-effect modal-trigger" href="#sign_up_modal">회원가입</a></li>
+        </ul>
+        <% } %>
+          <!-- <ul id="nav-mobile" class="side-nav">
+      <li><a href="#">로그인</a></li>
+    </ul> -->
+
+
+          <!-- <ul id="nav-mobile" class="side-nav">
+      <li><a href="#">회원가입</a></li>
+    </ul> -->
+          <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
   </div>
 </nav>
+
+<!-- Modal Structure -->
+<div id="sign_in_modal" class="modal">
+  <form action="/signin" method="post">
+    <div class="modal-content">
+      <div>
+        <label>Username:</label>
+        <input type="text" name="username" />
+      </div>
+      <div>
+        <label>Password:</label>
+        <input type="password" name="password" />
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class=" modal-action modal-close waves-effect waves-green btn-flat">로그인</button>
+    </div>
+  </form>
+</div>
+
+<div id="sign_up_modal" class="modal">
+  <form action="/signup" method="post">
+    <div class="modal-content">
+      <div>
+        <label>Email:</label>
+        <input type="text" name="email" />
+      </div>
+      <div>
+        <label>Username:</label>
+        <input type="text" name="username" />
+      </div>
+      <div>
+        <label>Contact:</label>
+        <input type="text" name="contact" />
+      </div>
+      <div>
+        <label>Password:</label>
+        <input type="password" name="password" />
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class=" modal-action modal-close waves-effect waves-green btn-flat">회원가입</button>
+    </div>
+  </form>
+</div>
+
+<script>
+  $('.modal-trigger').leanModal();
+</script>

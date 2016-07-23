@@ -1,3 +1,5 @@
-exports.renderFaq = function(req, res, next){
-  res.render('faq/faq');
+exports.renderFaq = function(req, res, next) {
+  res.render('faq/faq', {
+    user: req.user || ''
+  });
 }

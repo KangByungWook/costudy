@@ -7,6 +7,11 @@ var ProductSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   },
+  //모임 제목
+  title: {
+    type: String,
+    required: '제목을 입력해주세요'
+  },
   // 모임 소개
   introduction: {
     type: String,
@@ -18,32 +23,32 @@ var ProductSchema = new Schema({
     required: '지역을 선택해주세요'
   },
   // 모임 간격 ex)주 2회, 총 3달
-  term: {
-    perWeek: {
-      type: Number
-    },
-    forMonth: {
-      type: Number
-    }
-  },
   //
-  time: {
-    weekDay: {
-      type: [String]
+  timeInfo: {
+    term: {
+      perWeek: {
+        type: Number
+      },
+      forMonth: {
+        type: Number
+      }
     },
-    time: {
-      type: String
-    }
+    week: [{
+      day:{
+        type: String
+      },
+      time:{
+        type: String
+      }
+    }]
   },
   maxPersonNum: {
     type: Number,
     required: '최대 모임 인원을 입력해주세요'
   },
   enrolledPeople: [{
-    enrolledBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User'
-    }
   }],
   posts: [{
     post: {

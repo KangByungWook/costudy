@@ -1,2 +1,91 @@
 <% layout('../base') -%>
-<h1><%=product_data.id%>번 product</h1>
+
+  <div class="container row">
+    <div class="row">
+      <div class="col s8">
+        <div class="slider">
+          <ul class="slides">
+            <li>
+              <img src="http://lorempixel.com/580/250/nature/1">
+              <!-- random image -->
+              <div class="caption center-align">
+                <h3>This is our big Tagline!</h3>
+                <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+              </div>
+            </li>
+            <li>
+              <img src="http://lorempixel.com/580/250/nature/2">
+              <!-- random image -->
+              <div class="caption left-align">
+                <h3>Left Aligned Caption</h3>
+                <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+              </div>
+            </li>
+            <li>
+              <img src="http://lorempixel.com/580/250/nature/3">
+              <!-- random image -->
+              <div class="caption right-align">
+                <h3>Right Aligned Caption</h3>
+                <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+              </div>
+            </li>
+            <li>
+              <img src="http://lorempixel.com/580/250/nature/4">
+              <!-- random image -->
+              <div class="caption center-align">
+                <h3>This is our big Tagline!</h3>
+                <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <p class="center-align"><%=product.location%></p>
+        <h1 class="center-align"><%=product.title%></h1>
+        <div class="divider"></div>
+        <div class="section">
+          <h5>스터디 소개</h5>
+          <p><%=product.introduction%></p>
+        </div>
+        <div class="divider"></div>
+        <div class="section">
+          <h5>상세정보</h5>
+          <table>
+            <tr>
+              <td><p>지역:<%=product.location%></p></td>
+              <td><p>인원:<%=product.maxPersonNum%>명</p></td>
+            </tr>
+            <tr>
+              <td><p>일정:<%=product.timeInfo.term.forMonth%>개월, 주 <%=product.timeInfo.term.perWeek%>회</p></td>
+              <td><p>장소비:<%if (product.locationFeeIncluded){%>포함<%}else{%>미포함<%}%></p></td>
+            </tr>
+            <tr>
+              <td>
+                <p>시간</p>
+                <%for(var i = 0; i < product.timeInfo.week.length; i++){%>
+                    <p>(<%=product.timeInfo.week[i].day%>)<%=product.timeInfo.week[i].time%></p>
+                <%}%>
+              </td>
+              <td><p></p></td>
+            </tr>
+          </table>
+        </div>
+        <div class="section">
+          <h5>리더 소개</h5>
+          <p><%=product.leader%></p>
+        </div>
+        <div class="divider"></div>
+      </div>
+      <div id="side_bar" class="col s4">
+        <div style="border:1px solid black; height:400px;">
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    $(document).ready(function() {
+      $("#side_bar").stick_in_parent();
+      $('.slider').slider();
+    });
+  </script>

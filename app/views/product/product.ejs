@@ -1,2 +1,8 @@
 <% layout('../base') -%>
-<h1>product index</h1>
+<h1>product 등록페이지</h1>
+<form action="/product" method="post">
+  <input type="text" name="introduction" placeholder="introduction"/>
+  <input type="text" name="location" placeholder="location"/>
+  <input type="text" name="maxPersonNum" placeholder="maxPersonNum"/>
+  <input type="submit" />
+</form>

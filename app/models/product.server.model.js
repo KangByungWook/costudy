@@ -19,13 +19,11 @@ var ProductSchema = new Schema({
   },
   // 모임 간격 ex)주 2회, 총 3달
   term: {
-    detail: {
-      perWeek: {
-        type: Number
-      },
-      forMonth: {
-        type: Number
-      }
+    perWeek: {
+      type: Number
+    },
+    forMonth: {
+      type: Number
     }
   },
   //

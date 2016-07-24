@@ -1,19 +1,19 @@
 var Product = require('mongoose').model('Product');
 
-exports.renderOrderPage = function(req, res, next){
-  if(!req.user){
-    res.redirect('/');
-  }
+exports.renderOrderPage = function(req, res, next) {
+  // if(!req.user){
+  //   res.redirect('/');
+  // }
   res.render('order/order', {
     user: req.user,
     product: req.product
   });
 }
 
-exports.renderOrderDonePage = function(req, res, next){
-  if(!req.user){
-    res.redirect('/');
-  }
+exports.renderOrderDonePage = function(req, res, next) {
+  // if(!req.user){
+  //   res.redirect('/');
+  // }
   res.render('order/order_done', {
     user: req.user,
     product: req.product
@@ -21,15 +21,15 @@ exports.renderOrderDonePage = function(req, res, next){
 }
 
 exports.productById = function(req, res, next, id) {
-  if(!req.user){
-    res.redirect('/');
-  }
+  // if(!req.user){
+  //   res.redirect('/');
+  // }
   Product.findOne({
-    _id:id
-  }, function(err, product){
-    if(err){
+    _id: id
+  }, function(err, product) {
+    if (err) {
       return next(err);
-    }else{
+    } else {
       req.product = product;
       next();
     }
@@ -38,32 +38,28 @@ exports.productById = function(req, res, next, id) {
 
 
 exports.enroll = function(req, res, next, id) {
-  if(!req.user){
+  if (!req.user) {
     res.redirect('/');
   }
 
-  Product.findOne({
-    _id:id
-  }, function(err, product){
-    if(err){
-      return next(err);
-    }else{
-      // 등록하는 회원정보 추가
-      var newMemberInfo = {
-        introduction: '안녕하세요',
-        contact: '01012341234',
+  Product.findOneAndUpdate({
+    _id: id
+  }, {
+    $push: {
+      "enrolledPeople": {
+        introduction: req.body.introduction,
+        contact: req.body.contact,
         enrolledBy: req.user._id
-      };
-      product.enrolledPeople.push(newMemberInfo);
-
-      Product.findByIdAndUpdate(product.id, product, function(err, product){
-        if(err){
-          return next(err);
-        } else{
-          req.product = product;
-        }
-      });
-
+      }
+    }
+  },{
+    // 새로 업데이트된 데이터를 담는다
+    new: true
+  }, function(err, product) {
+    if (err) {
+      return next(err);
+    } else {
+      req.product = product;
       next();
     }
   });

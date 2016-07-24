@@ -90,7 +90,7 @@ exports.productById = function(req, res, next, id) {
       _id: id
     })
     .populate('leader')
-    .populate('enrolledPeople')
+    .populate('enrolledPeople.enrolledBy')
     .exec(function(error, product) {
       if (error) {
         return next(error);

@@ -1,10 +1,39 @@
 <% layout('../base') -%>
-<h1>주문페이지</h1>
-<p>
-  상품
-</p>
-<%= product%>
-<p>
-  유저 정보
-</p>
-<%= user %>
+  <div class="container">
+    <div class="row">
+      <div class="col s12">
+        <ul class="tabs">
+          <li id="step1_tab" class="tab col s3"><a class="active" href="#step1">참여신청</a></li>
+          <li id="step2_tab" class="tab col s3 disabled"><a id="step2_link" href="#step2">결제</a></li>
+          <li id="step3_tab" class="tab col s3 disabled"><a href="#step3">참여신청완료</a></li>
+        </ul>
+      </div>
+      <form action="/product/<%=product.id%>/order_done" method="post">
+        <div id="step1" class="col s12">
+          <span>
+          안녕하세요. 함께 하게 될 <%=product.leader.username%>입니다.
+          </span>
+          <input type="text" name="introduction" placeholder="자기소개를 해주세요.스터디를 신청한 목적은 무엇인가요?" />
+          <input type="text" name="contact" placeholder="스터디 안내를 드릴 연락처를 알려주세요!" />
+          <a class="btn" id="step1_next">다음으로</a>
+        </div>
+
+        <div id="step2" class="col s12">
+          결제 내용 어쩌구
+          <input type="submit" value="등록하기" />
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+
+  <script>
+    $(document).ready(function() {
+      $('ul.tabs').tabs();
+      $('#step1_next').click(function(){
+        $('#step2_tab').removeClass('disabled');
+        $('#step2_link').click();
+      })
+    });
+  </script>

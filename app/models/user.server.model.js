@@ -13,11 +13,6 @@ var UserSchema = new Schema({
     trim: true,
     required: '실명을 입력해주세요'
   },
-  contact: {
-    type: String,
-    trim: true,
-    required: '연락처를 입력해주세요'
-  },
   password: {
     type: String,
     required: true,

@@ -34,10 +34,10 @@ var ProductSchema = new Schema({
       }
     },
     week: [{
-      day:{
+      day: {
         type: String
       },
-      time:{
+      time: {
         type: String
       }
     }]
@@ -47,8 +47,16 @@ var ProductSchema = new Schema({
     required: '최대 모임 인원을 입력해주세요'
   },
   enrolledPeople: [{
+    introduction: {
+      type: String
+    },
+    contact: {
+      type: String
+    },
+    enrolledBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User'
+    }
   }],
   posts: [{
     post: {

@@ -74,10 +74,30 @@
           <p><%=product.leader%></p>
         </div>
         <div class="divider"></div>
+        <div class="section">
+          <h5>현재 참여자 <%=product.enrolledPeople.length%>명</h5>
+          <%for(var i = 0 ; i <  product.enrolledPeople.length; i++){%>
+            <p><%=product.enrolledPeople[i].enrolledBy.username%></p>
+          <%}%>
+        </div>
+        <div class="divider"></div>
       </div>
       <div id="side_bar" class="col s4">
-        <div style="border:1px solid black; height:400px;">
-
+        <div style="border:1px solid black;">
+          <div class="section">
+            <span class="center-align"><%=product.title%></span>
+          </div>
+          <div class="divider"></div>
+          <div class="section">
+            <span class="center-align">참가비: 00원</span>
+          </div>
+          <div class="divider"></div>
+          <button class="btn waves-effect waves-light center-align" type="submit" name="action">참여신청
+            <i class="material-icons right">send</i>
+          </button>
+          <button class="btn waves-effect waves-light center-align" type="submit" name="action">찜하기
+            <i class="material-icons right">send</i>
+          </button>
         </div>
       </div>
     </div>

@@ -39,26 +39,22 @@ exports.create = function(req, res, next) {
 
     // 임시 디폴트값
     product.timeInfo = {
-      term:{
+      term: {
         perWeek: 3,
         forMonth: 3
       },
-      week:[
-        {
-          day: '월',
-          time: '14:00~16:00'
-        },
-        {
-          day: '수',
-          time: '17:00~18:00'
-        },
-        {
-          day: '금',
-          time: '11:00~13:00'
-        }
-      ]
+      week: [{
+        day: '월',
+        time: '14:00~16:00'
+      }, {
+        day: '수',
+        time: '17:00~18:00'
+      }, {
+        day: '금',
+        time: '11:00~13:00'
+      }]
     };
-    product.enrolledPeople = [req.user.id];
+    product.enrolledPeople = [];
     product.locationFeeIncluded = true;
     product.studyType = 'study'
     product.save(function(err) {
@@ -114,7 +110,8 @@ exports.update = function(req, res, next) {
       res.json(product);
     }
   });
-}
+};
+
 
 exports.delete = function(req, res, next) {
   req.product.remove(function(err) {

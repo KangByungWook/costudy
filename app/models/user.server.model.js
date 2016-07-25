@@ -2,6 +2,7 @@ var mongoose = require('mongoose'),
   crypto = require('crypto'),
   Schema = mongoose.Schema;
 
+
 var UserSchema = new Schema({
   email: {
     type: String,
@@ -22,10 +23,14 @@ var UserSchema = new Schema({
       'Password should be longer' // 조건에 맞지 않을 시 해당 메시지를 콜백으로 전달
     ]
   },
+  products: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Product'
+  }],
   salt: {
     type: String
   },
-  provider:{
+  provider: {
     type: String,
     required: 'Provider is required'
   },
@@ -60,8 +65,8 @@ var UserSchema = new Schema({
 //   this.lastName = splitName[1] || '';
 // });
 
-UserSchema.pre('save', function(next){
-  if (this.password){
+UserSchema.pre('save', function(next) {
+  if (this.password) {
     this.salt = new Buffer(crypto.randomBytes(16).toString('base64'), 'base64');
     this.password = this.hashPassword(this.password);
   }
@@ -69,28 +74,28 @@ UserSchema.pre('save', function(next){
   next();
 });
 
-UserSchema.methods.hashPassword = function(password){
+UserSchema.methods.hashPassword = function(password) {
   return crypto.pbkdf2Sync(password, this.salt, 10000, 64).toString('base64');
 };
 
-UserSchema.methods.authenticate = function(password){
+UserSchema.methods.authenticate = function(password) {
   return this.password === this.hashPassword(password);
 };
 
-UserSchema.statics.findUniqueUsername = function(username, suffix, callback){
-  var _this  = this;
+UserSchema.statics.findUniqueUsername = function(username, suffix, callback) {
+  var _this = this;
   var possibleUsername = username + (suffix || '');
 
   _this.findOne({
-    username:possibleUsername
-  },function(err, user){
-    if(!err){
-      if(!user){
+    username: possibleUsername
+  }, function(err, user) {
+    if (!err) {
+      if (!user) {
         callback(possibleUsername);
-      } else{
+      } else {
         return _this.findUniqueUsername(username, (suffix || 0) + 1, callback);
       }
-    } else{
+    } else {
       callback(null);
     }
   });
@@ -119,4 +124,5 @@ UserSchema.set('toJSON', {
   getters: true,
   virtuals: true
 });
+
 mongoose.model('User', UserSchema);

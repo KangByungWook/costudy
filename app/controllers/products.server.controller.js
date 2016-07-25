@@ -91,12 +91,12 @@ exports.productById = function(req, res, next, id) {
     })
     .populate('leader')
     .populate('enrolledPeople.enrolledBy')
-    .exec(function(error, product) {
+    .exec(function(error, products) {
       if (error) {
         return next(error);
       } else {
         // 배열값으로 주기때문에 [0]을 붙여야댐!!
-        req.product = product[0];
+        req.product = products[0];
         next();
       }
     });

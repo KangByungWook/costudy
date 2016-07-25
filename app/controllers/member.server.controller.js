@@ -30,13 +30,13 @@ exports.edit = function(req, res, next) {
 exports.update = function(req, res, next) {
   User.findOneAndUpdate({
     _id: req.user.id
-  },{
-    $set:{
+  }, {
+    $set: {
       "username": req.body.username
     }
-  },{
+  }, {
     new: true
-  },function(err, user){
+  }, function(err, user) {
     req.user = user;
     res.redirect('/member/edit');
   })
@@ -46,9 +46,18 @@ exports.product = function(req, res, next) {
   if (!req.user) {
     res.redirect('/');
   }
-  res.render('member/product', {
-    user: req.user
-  })
+  User.find({
+    _id: req.user.id
+  }).populate('products').exec(function(err, users) {
+    if(err){
+      return next(err);
+    }else{
+      res.render('member/product', {
+        user: users[0]
+      });
+    }
+  });
+
 }
 
 exports.transaction = function(req, res, next) {

@@ -1,3 +1,5 @@
 <% layout('../base') -%>
 <h1>유저의 현재 스터디 목록</h1>
-<%=user%>
+<%for(var i = 0 ; i < user.products.length ; i++){%>
+    <h1><%=user.products[i].title%></h1>
+<%}%>

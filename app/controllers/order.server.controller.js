@@ -1,4 +1,5 @@
-var Product = require('mongoose').model('Product');
+var Product = require('mongoose').model('Product'),
+  User = require('mongoose').model('User');
 
 exports.renderOrderPage = function(req, res, next) {
   // if(!req.user){
@@ -52,13 +53,24 @@ exports.enroll = function(req, res, next, id) {
         enrolledBy: req.user._id
       }
     }
-  },{
-    // 새로 업데이트된 데이터를 담는다
+  }, {
     new: true
   }, function(err, product) {
     if (err) {
       return next(err);
     } else {
+      // 유저의 스터디 리스트에도 추가
+      User.findOneAndUpdate({
+        _id: req.user._id
+      }, {
+        $push: {
+          "products": product._id
+        }
+      }, {
+        new: true
+      }, function(err, user){
+        req.user = user;
+      });
       req.product = product;
       next();
     }

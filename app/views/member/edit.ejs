@@ -1,3 +1,6 @@
 <% layout('../base') -%>
 <h1>유저 정보 수정</h1>
-<%=user%>
+<form action="/member/update" method="post">
+  <input type="text" name="username" value="<%=user.username%>"/>
+  <input type="submit" value="이름수정" />
+</form>

@@ -64,7 +64,7 @@
 </div>
 
 <div id="sign_up_modal" class="modal">
-  <form action="/signup" method="post">
+  <form action="/signup" method="post" enctype="multipart/form-data">
     <div class="modal-content">
       <div>
         <label>Email:</label>
@@ -81,6 +81,9 @@
       <div>
         <label>Password:</label>
         <input type="password" name="password" />
+      </div>
+      <div>
+        <input type="file" name="image" />
       </div>
     </div>
     <div class="modal-footer">

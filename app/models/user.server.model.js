@@ -1,7 +1,13 @@
 var mongoose = require('mongoose'),
   crypto = require('crypto'),
   Schema = mongoose.Schema;
+var path = require('path');
+var thumbnailPluginLib = require('mongoose-thumbnail');
+var thumbnailPlugin = thumbnailPluginLib.thumbnailPlugin;
+var make_upload_to_model = thumbnailPluginLib.make_upload_to_model;
 
+var uploads_base = path.join(__dirname, "uploads");
+var uploads = path.join(uploads_base, "u");
 
 var UserSchema = new Schema({
   email: {
@@ -55,6 +61,15 @@ var UserSchema = new Schema({
   }
 });
 
+UserSchema.plugin(thumbnailPlugin, {
+    name: "image",
+    format: "png",
+    size: 80,
+    inline: false,
+    save: true,
+    upload_to: make_upload_to_model(uploads, 'photos'),
+    relative_to: uploads_base
+});
 // // 가상 컬럼 생성
 // // 모든 도큐먼트에 적용
 // UserSchema.virtual('fullName').get(function() {

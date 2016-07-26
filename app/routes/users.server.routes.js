@@ -1,8 +1,12 @@
 var users = require('../../app/controllers/users.server.controller'),
 passport = require('passport');
+var multer  = require('multer')
+var upload = multer({ dest: 'uploads/' })
 
 module.exports = function(app){
-  app.route('/signup').get(users.renderSignup).post(users.signup);
+  app.get('/signup', users.renderSignup);
+  app.post('/signup', upload.single('image'), users.signup);
+  // app.route('/signup').get(users.renderSignup).post(users.signup);
 
   app.route('/signin').get(users.renderSignin).post(passport.authenticate('local', {
     successRedirect: '/',
@@ -12,7 +16,7 @@ module.exports = function(app){
 
   app.get('/signout', users.signout);
 
-  app.route('/users').post(users.create).get(users.list);
+  app.route('/users').get(users.list);
 
   app.route('/users/:userId').get(users.read).put(users.update).delete(users.delete);
 

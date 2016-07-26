@@ -40,18 +40,19 @@
   <div class="container">
     <div class="section">
       <div class="row">
-        <%for (var i = 0 ; i < 9; i++){%>
+        <%=products%>
+        <%for (var i = 0 ; i < products.length; i++){%>
           <div class="col s12 m4">
             <div class="card small hoverable">
               <div class="card-image">
                 <img src="http://cfs9.tistory.com/image/8/tistory/2008/10/01/11/23/48e2df2bacfe4">
-                <span class="card-title">Card Title</span>
+                <span class="card-title"><%=products[i].title%></span>
               </div>
               <div class="card-content">
-                <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
+                <p><%=products[i].introduction%>(<%=products[i].location%>)</p>
               </div>
               <div class="card-action">
-                <a href="#">This is a link</a>
+                <a href="/product/<%=products[i]._id%>">This is a link</a>
               </div>
             </div>
           </div>

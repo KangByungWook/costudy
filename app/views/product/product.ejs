@@ -1,9 +1,12 @@
 <% layout('../base') -%>
 <h1>product 등록페이지</h1>
-<form action="/product" method="post">
+<form action="/product" method="post" enctype="multipart/form-data">
   <input type="text" name="title" placeholder="title"/>
   <input type="text" name="introduction" placeholder="introduction"/>
   <input type="text" name="location" placeholder="location"/>
   <input type="text" name="maxPersonNum" placeholder="maxPersonNum"/>
+  <input type="file" name="images" />
+  <input type="file" name="images" />
+  <input type="file" name="images" />
   <input type="submit" />
 </form>

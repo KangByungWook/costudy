@@ -12,7 +12,7 @@ exports.render = function(req, res){
       res.render('index',{
         title: 'Hello world',
         user: req.user || '',
-        products: products
+        products: JSON.parse(JSON.stringify(products))
       });
     }
   })

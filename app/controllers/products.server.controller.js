@@ -9,7 +9,7 @@ exports.index = function(req, res, next) {
 
 exports.productRead = function(req, res, next) {
   res.render('product/product_detail', {
-    product: req.product,
+    product: JSON.parse(req.product),
     user: req.user || ''
   });
 
@@ -35,6 +35,7 @@ exports.create = function(req, res, next) {
     res.redirect('/');
   } else {
     var product = new Product(req.body);
+    product.set('images', req.files)
     product.leader = req.user.id;
 
     // 임시 디폴트값
@@ -96,7 +97,7 @@ exports.productById = function(req, res, next, id) {
         return next(error);
       } else {
         // 배열값으로 주기때문에 [0]을 붙여야댐!!
-        req.product = products[0];
+        req.product = JSON.stringify(products[0]);
         next();
       }
     });

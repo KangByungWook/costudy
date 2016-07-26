@@ -10,7 +10,10 @@
         <!-- Dropdown Structure -->
         <ul id='user_info' class='dropdown-content'>
           <li>
-            <%= user.username%>
+            <div class="chip">
+              <img src="<%=user.image.path.substring(6)%>" alt="Contact Person"> <%= user.username%>
+            </div>
+
           </li>
           <li><a href="/member/edit">프로필 보기</a></li>
           <li class="divider"></li>

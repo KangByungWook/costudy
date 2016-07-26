@@ -1,7 +1,7 @@
 var users = require('../../app/controllers/users.server.controller'),
 passport = require('passport');
 var multer  = require('multer')
-var upload = multer({ dest: 'uploads/' })
+var upload = multer({ dest: 'public/uploads/' })
 
 module.exports = function(app){
   app.get('/signup', users.renderSignup);

@@ -10,7 +10,10 @@
         <!-- Dropdown Structure -->
         <ul id='user_info' class='dropdown-content'>
           <li>
-            <%= user.username%>
+            <div class="chip">
+              <img src="<%=user.image.path.substring(6)%>" alt="Contact Person"> <%= user.username%>
+            </div>
+
           </li>
           <li><a href="/member/edit">프로필 보기</a></li>
           <li class="divider"></li>
@@ -64,7 +67,7 @@
 </div>
 
 <div id="sign_up_modal" class="modal">
-  <form action="/signup" method="post">
+  <form action="/signup" method="post" enctype="multipart/form-data">
     <div class="modal-content">
       <div>
         <label>Email:</label>
@@ -81,6 +84,9 @@
       <div>
         <label>Password:</label>
         <input type="password" name="password" />
+      </div>
+      <div>
+        <input type="file" name="image" />
       </div>
     </div>
     <div class="modal-footer">

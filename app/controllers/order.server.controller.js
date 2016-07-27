@@ -7,7 +7,7 @@ exports.renderOrderPage = function(req, res, next) {
   // }
   res.render('order/order', {
     user: req.user,
-    product: req.product
+    product: JSON.parse(req.product)
   });
 }
 

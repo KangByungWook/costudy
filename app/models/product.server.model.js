@@ -1,5 +1,12 @@
 var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
+var filePluginLib = require('mongoose-file');
+var filePlugin = filePluginLib.filePlugin;
+var make_upload_to_model = filePluginLib.make_upload_to_model;
+var path = require('path');
+
+var uploads_base = path.join(__dirname, "uploads");
+var uploads = path.join(uploads_base, "u");
 
 var ProductSchema = new Schema({
   // 모임의 리더
@@ -78,6 +85,13 @@ var ProductSchema = new Schema({
     default: Date.now
   }
 });
+
+ProductSchema.plugin(filePlugin, {
+    name: "images",
+    upload_to: make_upload_to_model(uploads, 'photos'),
+    relative_to: uploads_base
+});
+
 ProductSchema.set('toJSON', {
   getters: true,
   virtuals: true

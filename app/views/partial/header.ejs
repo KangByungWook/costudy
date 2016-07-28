@@ -11,7 +11,7 @@
         <ul id='user_info' class='dropdown-content'>
           <li>
             <div class="chip">
-              <img src="<%if (user.image.path != null){%><%=user.image.path.substring(6)%><%}%>" alt="Contact Person"> <%= user.username%>
+              <img src="<%if (!user.image.path && user.provider != 'facebook'){%><%=user.image.path.substring(6)%><%}else{%><%=user.providerData.picture.data.url%><%}%>" alt="Contact Person"> <%= user.username%>
             </div>
 
           </li>
@@ -49,6 +49,7 @@
 
 <!-- Modal Structure -->
 <div id="sign_in_modal" class="modal">
+  <a href="/oauth/facebook">페이스북 로그인</a>
   <form action="/signin" method="post">
     <div class="modal-content">
       <div>

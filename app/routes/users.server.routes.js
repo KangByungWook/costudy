@@ -22,6 +22,16 @@ module.exports = function(app){
 
   app.param('userId', users.userByID);
 
+  //facebook 로그인
+  app.get('/oauth/facebook', passport.authenticate('facebook', {
+    failureRedirect: '/signin',
+    scope : ['email']
+  }));
+  app.get('/oauth/facebook/callback', passport.authenticate('facebook', {
+    failureRedirect: '/signin',
+    successRedirect: '/',
+    scope : ['email']
+  }));
 }
 
 // CRUD

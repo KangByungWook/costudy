@@ -65,6 +65,10 @@ var ProductSchema = new Schema({
       ref: 'User'
     }
   }],
+  bookmarkedPeople: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }],
   posts: [{
     post: {
       type: mongoose.Schema.Types.ObjectId,

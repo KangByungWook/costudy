@@ -21,15 +21,19 @@ var UserSchema = new Schema({
     required: '실명을 입력해주세요'
   },
   password: {
-    type: String,
-    required: true,
-    validate: [function(password) {
-        return password.length >= 6;
-      },
-      'Password should be longer' // 조건에 맞지 않을 시 해당 메시지를 콜백으로 전달
-    ]
+    type: String
+    // required: true,
+    // validate: [function(password) {
+    //     return password.length >= 6;
+    //   },
+    //   'Password should be longer' // 조건에 맞지 않을 시 해당 메시지를 콜백으로 전달
+    // ]
   },
   products: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Product'
+  }],
+  bookmarks: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Product'
   }],

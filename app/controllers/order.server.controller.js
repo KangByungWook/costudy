@@ -76,3 +76,38 @@ exports.enroll = function(req, res, next, id) {
     }
   });
 }
+
+exports.addBookmark = function(req, res, next, id) {
+  if (!req.user) {
+    res.redirect('/');
+  }
+
+  Product.findOneAndUpdate({
+    _id: id
+  }, {
+    $push: {
+      "bookmarkedPeople": req.user._id
+    }
+  }, {
+    new: true
+  }, function(err, product) {
+    if (err) {
+      return next(err);
+    } else {
+      // 유저의 스터디 리스트에도 추가
+      User.findOneAndUpdate({
+        _id: req.user._id
+      }, {
+        $push: {
+          "bookmarks": product._id
+        }
+      }, {
+        new: true
+      }, function(err, user){
+        req.user = user;
+      });
+      req.product = product;
+      next();
+    }
+  });
+}

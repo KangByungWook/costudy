@@ -2,9 +2,9 @@ var Product = require('mongoose').model('Product'),
   User = require('mongoose').model('User');
 
 exports.renderOrderPage = function(req, res, next) {
-  // if(!req.user){
-  //   res.redirect('/');
-  // }
+  if(!req.user){
+    res.redirect('/');
+  }
   res.render('order/order', {
     user: req.user,
     product: JSON.parse(req.product)
@@ -110,4 +110,8 @@ exports.addBookmark = function(req, res, next, id) {
       next();
     }
   });
+}
+
+exports.returnJsonData = function(req, res, next){
+  res.json(req.user);
 }

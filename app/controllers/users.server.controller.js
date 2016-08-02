@@ -168,3 +168,8 @@ exports.saveOAuthUserProfile = function(req, profile, done) {
 		}
 	});
 };
+
+exports.setReturnTo = function(req, res, next){
+  req.session.returnTo = "www.naver.com";
+  next();
+}

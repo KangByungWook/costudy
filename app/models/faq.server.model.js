@@ -1,13 +1,13 @@
 var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
 
-var PostSchema = new Schema({
-  // study
-  product: {
-    type: Schema.Types.ObjectId,
-    ref: 'Product'
+var FaqSchema = new Schema({
+  // Faq 제목
+  title: {
+    type: String,
+    required: '제목을 입력해주세요'
   },
-  // Post 내용
+  // Faq 내용
   content: {
     type: String,
     required: '내용을 입력해주세요'
@@ -22,8 +22,8 @@ var PostSchema = new Schema({
     default: Date.now
   }
 });
-PostSchema.set('toJSON', {
+FaqSchema.set('toJSON', {
   getters: true,
   virtuals: true
 });
-mongoose.model('Post', PostSchema);
+mongoose.model('Faq', FaqSchema);

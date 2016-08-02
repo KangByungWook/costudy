@@ -73,9 +73,9 @@
           <a class="btn waves-effect waves-light center-align" href="/product/<%=product.id%>/order" name="action">참여신청
             <i class="material-icons right">send</i>
           </a>
-          <a class="btn waves-effect waves-light center-align" href="/api/product/<%=product.id%>/bookmark" name="action">찜하기
+          <div id="addBookmark" class="btn waves-effect waves-light center-align">찜하기
             <i class="material-icons right">send</i>
-          </a>
+          </div>
         </div>
       </div>
   </div>
@@ -84,5 +84,13 @@
     $(document).ready(function() {
       $("#side_bar").stick_in_parent();
       $('.slider').slider();
+      $('#addBookmark').click(function(){
+        $.ajax({
+          url: window.location.origin+"/api/product/<%=product.id%>/bookmark",
+          success: function(data){
+              alert(data);
+          }
+        });
+      })
     });
   </script>

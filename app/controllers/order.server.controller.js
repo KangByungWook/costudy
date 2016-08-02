@@ -46,7 +46,7 @@ exports.enroll = function(req, res, next, id) {
   Product.findOneAndUpdate({
     _id: id
   }, {
-    $push: {
+    $addToSet: {
       "enrolledPeople": {
         introduction: req.body.introduction,
         contact: req.body.contact,
@@ -63,7 +63,7 @@ exports.enroll = function(req, res, next, id) {
       User.findOneAndUpdate({
         _id: req.user._id
       }, {
-        $push: {
+        $addToSet: {
           "products": product._id
         }
       }, {
@@ -85,11 +85,9 @@ exports.addBookmark = function(req, res, next, id) {
   Product.findOneAndUpdate({
     _id: id
   }, {
-    $push: {
+    $addToSet: {
       "bookmarkedPeople": req.user._id
     }
-  }, {
-    new: true
   }, function(err, product) {
     if (err) {
       return next(err);
@@ -98,11 +96,9 @@ exports.addBookmark = function(req, res, next, id) {
       User.findOneAndUpdate({
         _id: req.user._id
       }, {
-        $push: {
+        $addToSet: {
           "bookmarks": product._id
         }
-      }, {
-        new: true
       }, function(err, user){
         req.user = user;
       });

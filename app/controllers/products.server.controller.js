@@ -38,22 +38,21 @@ exports.create = function(req, res, next) {
     product.set('images', req.files)
     product.leader = req.user.id;
 
+    weekArr = [];
+    for(var i = 0 ; i < req.body.weekday.length ; i++){
+      weekArr.push({
+        day: req.body.weekday[i],
+        time: '14:00~16:00'
+      })
+    }
+
     // 임시 디폴트값
     product.timeInfo = {
       term: {
-        perWeek: 3,
-        forMonth: 3
+        perWeek: req.body.perweek,
+        forMonth: req.body.formonth
       },
-      week: [{
-        day: '월',
-        time: '14:00~16:00'
-      }, {
-        day: '수',
-        time: '17:00~18:00'
-      }, {
-        day: '금',
-        time: '11:00~13:00'
-      }]
+      week: weekArr
     };
     product.enrolledPeople = [];
     product.locationFeeIncluded = true;

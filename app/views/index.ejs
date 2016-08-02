@@ -45,7 +45,9 @@
           <div class="col s12 m4">
             <div class="card small hoverable">
               <div class="card-image">
-                <img src="<%=products[i].images[0].path.substring(6)%>">
+                <%if (typeof products[i].images[0] != 'undefined'){%>
+                  <img src="<%=products[i].images[0].path.substring(6)%>">
+                <%}%>
                 <span class="card-title"><%=products[i].title%></span>
               </div>
               <div class="card-content">

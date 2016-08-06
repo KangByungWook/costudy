@@ -22,20 +22,27 @@ exports.renderOrderDonePage = function(req, res, next) {
 }
 
 exports.productById = function(req, res, next, id) {
-  // if(!req.user){
-  //   res.redirect('/');
-  // }
-  Product.findOne({
-    _id: id
-  }, function(err, product) {
-    if (err) {
-      return next(err);
-    } else {
-      req.product = product;
-      next();
-    }
-  });
-}
+  if (!req.user) {
+    res.redirect('/');
+  } else{
+    Product.find({
+        _id: id
+      })
+      .populate('leader')
+      .populate('enrolledPeople.enrolledBy')
+      .exec(function(error, products) {
+        if (error) {
+          return next(error);
+        } else {
+          var product = products[0]
+          // 배열값으로 주기때문에 [0]을 붙여야댐!!
+          req.product = JSON.stringify(product);
+          next();
+        }
+      });
+  };
+
+};
 
 
 exports.enroll = function(req, res, next, id) {

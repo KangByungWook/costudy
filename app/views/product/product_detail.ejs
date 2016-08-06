@@ -70,12 +70,29 @@
             <span class="center-align">참가비: 00원</span>
           </div>
           <div class="divider"></div>
-          <a class="btn waves-effect waves-light center-align" href="/product/<%=product.id%>/order" name="action">참여신청
-            <i class="material-icons right">send</i>
-          </a>
-          <div id="addBookmark" class="btn waves-effect waves-light center-align">찜하기
-            <i class="material-icons right">send</i>
-          </div>
+          <%if (user) {%>
+            <%var disabled = ""%>
+            <!-- 이미 등록했을 경우 -->
+            <% if (user.products.indexOf(product.id) != -1){%>
+              등록완료!
+            <%} else {%>
+              <a class="btn waves-effect waves-light center-align modal-trigger" href="/product/<%=product.id%>/order" name="action">참여신청
+                <i class="material-icons right">send</i>
+              </a>
+              <div id="addBookmark" class="btn waves-effect waves-light center-align">찜하기
+                <i class="material-icons right">send</i>
+              </div>
+            <% } %>
+
+          <%} else {%>
+            <a class="<%=disabled%> btn waves-effect waves-light center-align modal-trigger" onclick="login_trigger()" name="action">참여신청
+              <i class="material-icons right">send</i>
+            </a>
+            <div id="addBookmark" class="<%=disabled%> btn waves-effect waves-light center-align">찜하기
+              <i class="material-icons right">send</i>
+            </div>
+          <%}%>
+
         </div>
       </div>
   </div>
@@ -85,12 +102,20 @@
       $("#side_bar").stick_in_parent();
       $('.slider').slider();
       $('#addBookmark').click(function(){
+        <%if (user){%>
         $.ajax({
           url: window.location.origin+"/api/product/<%=product.id%>/bookmark",
           success: function(data){
-              alert(data);
+              alert("찜 목록에 추가되었습니다.");
           }
         });
+        <%}else{%>
+          login_trigger();
+        <%}%>
       })
     });
+
+    function login_trigger(){
+      $('#login_model_trigger').click();
+    }
   </script>

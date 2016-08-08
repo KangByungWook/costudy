@@ -84,6 +84,9 @@ var ProductSchema = new Schema({
     enum: ['study', 'lesson'],
     required: '스터디 방식을 선택해주세요'
   },
+  price: {
+    type: Number
+  },
   created: {
     type: Date,
     default: Date.now

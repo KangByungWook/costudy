@@ -9,6 +9,7 @@ module.exports = function(){
   require('../app/models/product.server.model');
   require('../app/models/post.server.model');
   require('../app/models/faq.server.model');
+  require('../app/models/payment.server.model');
 
   return db;
 }

@@ -1,5 +1,6 @@
 var Product = require('mongoose').model('Product'),
-  User = require('mongoose').model('User');
+  User = require('mongoose').model('User'),
+  Payment = require('mongoose').model('Payment');
 
 exports.renderOrderPage = function(req, res, next) {
   if(!req.user){
@@ -81,6 +82,12 @@ exports.enroll = function(req, res, next, id) {
       req.product = product;
       next();
     }
+    var payment = new Payment({
+      product: product._id,
+      orderedBy: req.user.id,
+      price: product.price
+    });
+    payment.save();
   });
 }
 
